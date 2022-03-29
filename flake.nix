@@ -9,7 +9,7 @@
   };
 
   outputs = { self, nixpkgs, poetry2nix, flake-utils, flake-compat, ... }:
-    flake-utils.lib.eachDefaultSystem (system: let
+    flake-utils.lib.eachSystem flake-utils.lib.allSystems (system: let
       pkgs            = import nixpkgs { inherit system; overlays = [poetry2nix.overlay]; };
       nixopsPluggable = import ./nixops-pluggable.nix pkgs;
 
